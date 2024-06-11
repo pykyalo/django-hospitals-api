@@ -48,6 +48,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework_gis",
     "django_extensions",
+    "leaflet",
 ]
 
 PROJECT_APPS = ["hospitals.apps.HospitalsConfig", "boundaries.apps.BoundariesConfig"]
@@ -140,3 +141,12 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LEAFLET_CONFIG = {
+    "DEFAULT_CENTER": (-1.94, 29.87),
+    "DEFAULT_ZOOM": 8,
+    "MAX_ZOOM": 20,
+    "MIN_ZOOM": 3,
+    "SCALE": "both",
+    "ATTRIBUTION_PREFIX": "PY-KYALO Hospitals API",
+}
