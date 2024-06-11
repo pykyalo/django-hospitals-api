@@ -1,0 +1,33 @@
+FROM python:3.11 as hospitals_api_base
+
+# Copy project
+COPY . /app
+WORKDIR /app
+
+# Ensure the ./dist directory exists in the /app directory and copy static
+# files to it. This folder will be served by a CDN.
+RUN mkdir -p ./dist
+COPY ./static/* ./dist/
+
+LABEL maintainer="pykyalo@gmail.com"
+LABEL description="skilling up with geodjango"
+
+ENV PYTHONFAULTHANDLER=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    POETRY_VIRTUALENVS_CREATE=false \
+    POETRY_CACHE_DIR='/var/cache/pypoetry'
+
+RUN apt-get update \
+    && apt-get -y install netcat-traditional gcc postgresql \
+    && apt-get clean
+
+RUN apt-get update \
+    && apt-get install -y binutils libproj-dev gdal-bin python3-gdal
+
+RUN pip install --upgrade pip
+
+RUN pip install poetry
+RUN poetry install
+
