@@ -49,6 +49,7 @@ THIRD_PARTY_APPS = [
     "rest_framework_gis",
     "django_extensions",
     "leaflet",
+    "django_filters",
 ]
 
 PROJECT_APPS = ["hospitals.apps.HospitalsConfig", "boundaries.apps.BoundariesConfig"]
@@ -149,4 +150,8 @@ LEAFLET_CONFIG = {
     "MIN_ZOOM": 3,
     "SCALE": "both",
     "ATTRIBUTION_PREFIX": "PY-KYALO Hospitals API",
+}
+
+REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"]
 }
